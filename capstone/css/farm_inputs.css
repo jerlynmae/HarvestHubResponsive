@@ -1,0 +1,327 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f6fa;
+  color: #333;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+  margin-left: 240px;
+  padding: 25px;
+  min-height: 100vh;
+  background: #ecf0f1;
+}
+
+/* ===== Headings ===== */
+.main-content h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.main-content h3 {
+  margin-bottom: 20px;
+  color: #16a085;
+}
+
+/* ===== Button ===== */
+.add-btn {
+  background: #16a085;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+.editBtn{
+  color: #4e54c8;
+  text-decoration: none;
+}
+.add-btn:hover {
+  background: #138d75;
+}
+
+/* ===== Table ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+table th {
+  background: #16a085;
+  color: #fff;
+  font-weight: 600;
+}
+
+table tr:hover {
+  background: #f2f2f2;
+}
+
+table td a {
+  color: #e74c3c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+table td a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Modal Base Style ===== */
+.modal {
+  display: none; /* default hidden */
+  position: fixed;
+  z-index: 999;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+/* ===== Modal Content ===== */
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 95%;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: popupScale 0.25s ease;
+}
+
+/* Smooth pop-up animation */
+@keyframes popupScale {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ===== Modal Header ===== */
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #333;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* ===== Close Button ===== */
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #888;
+  transition: 0.3s;
+}
+.close:hover { color: #000; }
+
+/* ===== Form Elements ===== */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.modal-content label {
+  font-weight: 600;
+  margin: 8px 0 5px;
+  color: #444;
+}
+
+.modal-content input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.modal-content input:focus {
+  border: 1px solid #4CAF50;
+}
+
+/* ===== Buttons ===== */
+.modal-content button {
+  margin-top: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background:#16a085;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.modal-content button:hover {
+  background:#16a085;
+}
+/* 🌤️ Weather Card */
+.weather-card {
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: #fff;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  max-width: 400px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+}
+
+.weather-card h4 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.weather-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.weather-main img {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.weather-temp {
+  font-size: 42px;
+  font-weight: bold;
+}
+
+.weather-desc {
+  font-size: 18px;
+  margin-top: -5px;
+  text-transform: capitalize;
+}
+
+.weather-details {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.weather-details span {
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .weather-card {
+    max-width: 100%;
+    padding: 15px;
+  }
+  .weather-temp {
+    font-size: 32px;
+  }
+}
+
+/* Menu Button (Hamburger) */
+.menu-button {
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000; /* green theme */
+  display: none;  /* default hidden (desktop) */
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.menu-button:hover {
+  background: #e8f5e9;
+  transform: scale(1.1);
+}
+
+/* Mobile only */
+@media (max-width: 768px) {
+  .menu-button {
+    display: block;  /* show on mobile */
+    margin-right: 10px;
+  }
+}
+
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+  .modal-content h3 {
+    font-size: 18px;
+  }
+  .button{
+    display: block;
+    color: #000;
+    order: 1;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 200px;
+  }
+  .button{
+    display: block;
+    color: #000;
+    order: 1;
+  }
+}
+@media (max-width: 768px) {
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+  .button{
+    display: block;
+    color: #000;
+    order: 1;
+  }
+  table th,
+  table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+
+
