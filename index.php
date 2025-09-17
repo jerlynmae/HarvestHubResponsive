@@ -173,6 +173,7 @@
           </div>
         </article>
       `).join('');
+    }
     function filter(){
       const q=search.value.trim().toLowerCase();
       const cat=category.value;
