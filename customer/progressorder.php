@@ -19,11 +19,12 @@ $order = [
 <head>
   <meta charset="UTF-8">
   <title>Order Progress</title>
+  <link rel="stylesheet" href="../css/progressorder.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<a href="orders.php" style="text-decoration:none; color:#333; font-size:20px;">
+<a href="customer_page.php" style="text-decoration:none; color:#333; font-size:20px;">
   <i class="fas fa-arrow-left"></i>
 </a>
 
