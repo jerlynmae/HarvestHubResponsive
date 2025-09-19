@@ -83,17 +83,22 @@ $result = $conn->query($sql);
       </nav>
     </div>
   </header>
+<!-- Sidebar Drawer -->
+<div class="sidebar" id="sidebar">
+  <span class="sidebar-close" id="sidebarClose">&times;</span>
+  <h3>Menu</h3>
+  <a href="#"><i class="fas fa-star"></i> What's New?</a>
+  <a href="#"><i class="fas fa-question-circle"></i> Help & Support</a>
+  <a href="#"><i class="fas fa-shopping-bag"></i> My Purchase</a>
+  <a href="#"><i class="fas fa-bell"></i> Notifications</a>
+  <a href="#"><i class="fas fa-calendar-alt"></i> Pre-Orders</a>
+</div>
 
-  <!-- Sidebar Drawer -->
-  <div class="sidebar" id="sidebar">
-    <span class="sidebar-close" id="sidebarClose">&times;</span>
-    <h3>Menu</h3>
-    <a href="#">What's New?</a>
-    <a href="#">Help & Support</a>
-    <a href="#">My Purchase</a>
-    <a href="#">Notifications</a>
-    <a href="#">Pre-Orders</a>
-  </div>
+<!-- Add this in your <head> if Font Awesome is not included yet -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
 
   <!-- Banners -->
   <div class="swiper">
@@ -108,36 +113,7 @@ $result = $conn->query($sql);
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
   </div>
-
-  <!-- Featured Veggies -->
-  <div class="veggie-grid">
-    <div class="veggie-card">
-      <img src="../img/kamatis.jpg" alt="Kamatis">
-      <h3 class="veggie-name">Kamatis</h3>
-      <a href="#" class="shop-now">SHOP NOW</a>
-    </div>
-    <div class="veggie-card">
-      <img src="../img/talong.jpg" alt="Talong">
-      <h3 class="veggie-name">Talong</h3>
-      <a href="#" class="shop-now">SHOP NOW</a>
-    </div>
-    <div class="veggie-card">
-      <img src="../img/ampalaya.jpg" alt="Ampalaya">
-      <h3 class="veggie-name">Ampalaya</h3>
-      <a href="#" class="shop-now">SHOP NOW</a>
-    </div>
-    <div class="veggie-card">
-      <img src="../img/kalabasa.jpg" alt="Kalabasa">
-      <h3 class="veggie-name">Kalabasa</h3>
-      <a href="#" class="shop-now">SHOP NOW</a>
-    </div>
-    <div class="veggie-card">
-      <img src="../img/pechay.jpg" alt="Pechay">
-      <h3 class="veggie-name">Pechay</h3>
-      <a href="#" class="shop-now">SHOP NOW</a>
-    </div>
-  </div>
-
+  
   <!-- PRODUCTS -->
   <section id="shop" class="container" style="padding:20px;">
     <h2 style="margin:20px 0; color:#16a085;">Available Products</h2>

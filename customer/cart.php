@@ -2,7 +2,6 @@
 session_start();
 include "../config/db_connect.php";
 
-// Initialize cart session
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -46,105 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 <link rel="stylesheet" href="../css/cart.css?v=<?=time()?>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* Mobile Responsive Cart - vertical stacking */
-@media (max-width: 768px) {
-  .cart-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
-  }
-  .cart-items { order: 1 !important; width: 100% !important; }
-  .order-summary { order: 2 !important; width: 100% !important; }
-  .cart-items table {
-    display: block !important;
-    width: 100% !important;
-    overflow-x: auto !important;
-    border-collapse: collapse !important;
-  }
-  .cart-items table th, .cart-items table td {
-    font-size: 14px !important;
-    padding: 8px !important;
-    white-space: nowrap !important;
-  }
-}
-/* Remove button style */
-.remove-btn {
-  background: #ff4d4f;
-  border: none;
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.remove-btn:hover { background: #e60000; }
-/* Back button & header */
-.cart-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background-color: white;
-  height: 50px;
-  margin-bottom: 20px;
-  padding: 0 10px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.back-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  color: #333;
-  text-decoration: none;
-}
 
-/* Confirmation modal styles */
-.confirm-modal {
-  display: none;
-  position: fixed;
-  top:0; left:0;
-  width: 100%; height:100%;
-  background: rgba(0,0,0,0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-.confirm-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  max-width: 320px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-.confirm-buttons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-.confirm-yes, .confirm-no {
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-}
-.confirm-yes { background: #004d2c; color: #fff; }
-.confirm-no { background: #ff4d4f; color: #fff; }
 </style>
 </head>
 <body>
 
 <!-- Header with Back Button -->
-<div class="cart-header">
-  <a href="customer_page.php" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-  <h2>My Cart</h2>
+<div class="header">
+  <a href="customer_page.php"><i class="fa-solid fa-arrow-left"></i></a>
+  <span>My Cart</span>
 </div>
 
 <?php if (!empty($_SESSION['cart'])): ?>
@@ -209,9 +118,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <p><span>Items total</span> <span>₱<?php echo number_format($grand_total, 2); ?></span></p>
     <p><span>Delivery fee</span> <span>₱50.00</span></p>
     <p class="subtotal"><span>Subtotal</span> <span>₱<?php echo number_format($grand_total + 50, 2); ?></span></p>
-    <button class="checkout-btn"><i class="fas fa-credit-card"></i> Checkout</button>
+    <form method="POST" action="checkoutpage.php">
+    <button type="submit" name="place_order" class="checkout-btn">
+        <i class="fas fa-credit-card"></i> Checkout
+    </button>
+</form>
   </div>
-
 </div>
 
 <!-- Confirmation Modal -->

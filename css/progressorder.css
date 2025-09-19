@@ -1,0 +1,91 @@
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      gap: 30px;
+    }
+    .left, .right {
+      background: #fff;
+    }
+    .left {
+      flex: 2;
+    }
+    .right {
+      flex: 1;
+    }
+    .card {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .status .badge {
+      border: 1px solid #0a8754;
+      color: #0a8754;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+    .status-main {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .status-main i {
+      font-size: 60px;
+      color: #28a745;
+    }
+    .status-main p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .items {
+      margin-top: 20px;
+    }
+    .items table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .items th, .items td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+    .items img {
+      width: 60px;
+      border-radius: 6px;
+    }
+    .cancel-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 18px;
+      border: 1px solid #333;
+      border-radius: 20px;
+      background: transparent;
+      cursor: pointer;
+    }
+    .order-summary h4 {
+      margin-bottom: 10px;
+    }
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .summary-item strong {
+      font-weight: bold;
+    }
+    .highlight {
+      color: #0a8754;
+      font-weight: bold;
+    }
