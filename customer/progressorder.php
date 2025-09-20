@@ -1,5 +1,5 @@
 <?php
-// Example order data (you can fetch this from your DB)
+
 $order = [
     "id" => "#123-321",
     "status" => "In Progress",
