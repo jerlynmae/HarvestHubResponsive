@@ -41,7 +41,7 @@ try {
         $result_top = $tmp;
     }
 } catch (mysqli_sql_exception $e) {
-    // fallback
+
 }
 
 include 'sidebar.php'; ?>
@@ -55,16 +55,16 @@ include 'sidebar.php'; ?>
   <title>Farmer Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../css/farmers_dashboard.css?v=<?= time() ?>"> 
+  <link rel="stylesheet" href="../css/sidebars.css?v=<?= time() ?>"> 
 </head>
 <body>
- 
+
   <!-- Overlay (mobile only) -->
   <div class="overlay" id="overlay"></div>
-
   <!-- Main Content -->
   <div class="main">
+    <h2> Dashboard</h2>
     <div class="notice">Notice: Your farm details are not set. Please complete it <a href="register_farm.php">here</a>.</div>
-
     <!-- Cards -->
     <div class="cards">
       <div class="card">

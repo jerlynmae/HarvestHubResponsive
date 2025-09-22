@@ -87,7 +87,7 @@ include 'sidebar.php';
         <?php if($result->num_rows>0): ?>
             <?php while($row=$result->fetch_assoc()): ?>
             <tr>
-                <td>Example Product (Vegetable)</td> <!-- placeholder -->
+                <td>Example Product (Vegetable)</td> 
                 <td><?= htmlspecialchars($row['name']) ?></td>
                 <td><?= htmlspecialchars($row['address']) ?></td>
                 <td><?= htmlspecialchars($row['lot_size'] ?? '1 lot') ?></td>
@@ -96,8 +96,8 @@ include 'sidebar.php';
                 <td><?= htmlspecialchars($row['date_time']) ?></td>
                 <td>
                     <?php if($row['status']=='Pending'): ?>
-                        <a href="?action=accept&id=<?= $row['order_id'] ?>&status=<?= $status_filter ?>">Accept</a> |
-                        <a href="?action=decline&id=<?= $row['order_id'] ?>&status=<?= $status_filter ?>">Decline</a> |
+                        <a href="?action=accept&id=<?= $row['order_id'] ?>&status=<?= $status_filter ?>"><i class='fa fa-check-circle'></i></a> 
+                        <a href="?action=decline&id=<?= $row['order_id'] ?>&status=<?= $status_filter ?>"><i class='fa fa-times-circle'></i></a> 
                     <?php endif; ?>
                     <a href="#" class="viewBtn"
                         data-name="<?= htmlspecialchars($row['name']) ?>"
@@ -106,7 +106,7 @@ include 'sidebar.php';
                         data-payment="<?= htmlspecialchars($row['mode_of_payment']) ?>"
                         data-date="<?= htmlspecialchars($row['date_time']) ?>"
                         data-status="<?= htmlspecialchars($row['status']) ?>"
-                        data-lot="<?= htmlspecialchars($row['lot_size'] ?? '1 lot') ?>">View</a>
+                        data-lot="<?= htmlspecialchars($row['lot_size'] ?? '1 lot') ?>"><i class='fa fa-eye'></i></a>
                 </td>
             </tr>
             <?php endwhile; ?>

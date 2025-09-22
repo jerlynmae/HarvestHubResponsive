@@ -1,8 +1,13 @@
 .main-content {
-  margin-left: 240px;
+  margin-left: 250px;
   padding: 25px;
   min-height: 100vh;
-  background: #ecf0f1;
+
+}
+
+h2 {
+    margin-top: 50px;
+    margin-top: -50px;
 }
 
 /* ===== Buttons ===== */
@@ -80,6 +85,39 @@ table td a {
     font-weight: bold;
 }
 
+/* ===== Action Buttons (like screenshot) ===== */
+td a, td button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-right: 6px;
+    border-radius: 10px;
+    border: none;
+    background: #f1f1f1; 
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+/* Icon Colors */
+td a.viewBtn i,
+td button.view i { color: #2e86de; } 
+td a.editBtn i,
+td button.edit i { color: #f39c12; } 
+td a.deleteBtn i { color: #e74c3c; } 
+
+/* Hover effect */
+td a:hover, td button:hover {
+    background: rgba(0,0,0,0.05); 
+}
+
+td a:hover i, td button:hover i {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
 /* ===== Modal ===== */
 .modal {
     display: none;
@@ -124,6 +162,8 @@ table td a {
 }
 .close:hover { color: #000; }
 
+
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .main-content {
@@ -145,12 +185,11 @@ table td a {
         font-size: 18px;
     }
 
-    /* Keep table as table but allow scrolling */
     .table-responsive {
         overflow-x: auto;
     }
     table {
-        min-width: 500px; /* adjust so columns remain visible */
+        min-width: 500px; 
     }
 
     table th, table td {
@@ -158,3 +197,5 @@ table td a {
         padding: 8px;
     }
 }
+
+

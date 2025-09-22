@@ -87,11 +87,13 @@ $result = $conn->query($sql);
 <div class="sidebar" id="sidebar">
   <span class="sidebar-close" id="sidebarClose">&times;</span>
   <h3>Menu</h3>
+  <a href="#"> <i class="fas fa-user"></i> My Profile</a>
   <a href="#"><i class="fas fa-star"></i> What's New?</a>
-  <a href="#"><i class="fas fa-question-circle"></i> Help & Support</a>
+  <a href="#"><i class="fas fa-calendar-alt"></i> Pre-Orders</a>
   <a href="#"><i class="fas fa-shopping-bag"></i> My Purchase</a>
   <a href="#"><i class="fas fa-bell"></i> Notifications</a>
-  <a href="#"><i class="fas fa-calendar-alt"></i> Pre-Orders</a>
+  <a href="#"> <i class="fas fa-message"></i> Message</a>
+   <a href="#"><i class="fas fa-question-circle"></i> Help & Support</a>
 </div>
 
 <!-- Add this in your <head> if Font Awesome is not included yet -->

@@ -89,3 +89,69 @@
       color: #0a8754;
       font-weight: bold;
     }
+
+    /* ===== Responsive Layout ===== */
+
+/* Tablet: stack columns vertically when screen < 992px */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;     /* stack left & right */
+    gap: 20px;
+  }
+  .left, .right {
+    flex: 1;
+    width: 100%;                /* full width cards */
+  }
+}
+
+/* Mobile: adjust padding, text size, and table scrolling */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  .card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  /* Status main icon smaller */
+  .status-main i {
+    font-size: 45px;
+  }
+
+  /* Table: allow horizontal scroll if content too wide */
+  .items {
+    overflow-x: auto;
+  }
+  .items table {
+    min-width: 450px;           /* keep column structure */
+  }
+  .items th, .items td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  /* Cancel button full width for easier tapping */
+  .cancel-btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+/* ===== Mobile only: move Order Summary below left section ===== */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;      /* stack left & right */
+  }
+  .left {
+    order: 1;                    /* left content first */
+  }
+  .right {
+    order: 2;                    /* right content second (below) */
+    width: 100%;                  /* full width on mobile */
+    margin-top: 20px;
+  }
+}
+

@@ -9,39 +9,57 @@ $fullname = $_SESSION['fullname'] ?? 'User';
 $role = $_SESSION['role'] ?? 'Farmer';
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farm Inputs</title>
+<link rel="stylesheet" href="../css/sidebar.css?v=<?= time() ?>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
   <div class="topbar">
-    <div class="logo">
-      <img src="../img/harvesthub_logo.png" alt="Logo">
-    </div>
-
-    <!-- Hamburger Menu (mobile only) -->
-    <button class="menu-button" id="menuBtn">☰</button>
-
-    <div class="profile">
-      <div class="avatar"></div>
-      <div class="profile-info">
-        <span class="name"><?= htmlspecialchars($fullname) ?></span>
-        <span class="role"><?= htmlspecialchars($role) ?></span>
-      </div>
-      <span class="dropdown">▼</span>
+    <div class="search-filter">
+      <input id="search" type="search" placeholder="Search..." />
     </div>
   </div>
+<!-- MENUUU-->
+<button id="menuBtn" class="menu-button">
+    <i class="fas fa-bars"></i>
+</button>
 
-  <!--  Sidebar -->
-  <div class="sidebar" id="sidebar">
-     <ul>
-        <li><a href="farmer_dashboard.php" class="active"><i class="fas fa-home"></i> Home</a></li>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+    <!-- Top Profile -->
+    <div class="sidebar-top">
+ <div class="profile">
+        <img src="../img/avatar.png" alt="Profile Picture" class="avatar">
+        <div class="profile-info">
+          <span class="name"><?= htmlspecialchars($fullname) ?></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+        <li><a href="farmer_dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
         <li><a href="farminput.php"><i class="fas fa-seedling"></i> Farm Inputs</a></li>
         <li><a href="inventory.php"><i class="fas fa-boxes"></i> Inventory</a></li>
         <li><a href="orders.php"><i class="fas fa-shopping-cart"></i> Orders</a></li>
         <li><a href="help.php"><i class="fas fa-question-circle"></i> Help & Support</a></li>
-        <li class="logout"> <a href="../logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
-  </div>
 
+    <!-- Bottom Logo -->
+    <div class="sidebar-bottom">
+        <div class="logo">Harvest Hub</div>
+    </div>
+</div>
 
 <!-- Overlay (mobile) -->
 <div class="overlay" id="overlay"></div>
+
 
 <!-- Menu toggle script -->
 <script>

@@ -12,17 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $farm_size     = trim($_POST['farm_size'] ?? '');
 
     if ($farm_name && $farm_location && $farm_type && $farm_size) {
-        // Example insert (i-adjust mo column names sa database mo)
         $stmt = $conn->prepare("INSERT INTO farms (farm_name, farm_location, farm_type, farm_size) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $farm_name, $farm_location, $farm_type, $farm_size);
         if ($stmt->execute()) {
             $message = " Farm registered successfully!";
         } else {
-            $message = "❌ Error: " . $stmt->error;
+            $message = " Error: " . $stmt->error;
         }
         $message = "Form submitted successfully.";
     } else {
-        $message = "⚠️ Please fill in all fields.";
+        $message = " Please fill in all fields.";
     }
 }
 ?>
@@ -32,14 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <title>Register Farm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/registerfarm.css">
+  <link rel="stylesheet" href="../css/registerfarm.css?v=<?= time() ?>">
 </head>
 <body>
   <div class="form-container">
     <h2>Register Your Farm</h2>
 
     <?php if ($message): ?>
-      <div class="message <?php echo strpos($message, '✅') !== false ? 'success' : 'error'; ?>">
+      <div class="message <?php echo strpos($message, '') !== false ? 'success' : 'error'; ?>">
         <?php echo htmlspecialchars($message); ?>
       </div>
     <?php endif; ?>

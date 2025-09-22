@@ -14,50 +14,40 @@ $user_id = $_SESSION['user_id'];
 $total_orders = 12;
 $pending_orders = 5;
 $completed_orders = 7;
+$completed_preorders = 3; // dummy value
 
 // ===== Get farm expenses for suggestion =====
 $expenseResult = $conn->query("SELECT SUM(cost) as total_cost FROM farm_inputs WHERE user_id = $user_id");
 $rowExpense = $expenseResult->fetch_assoc();
 $total_expenses = $rowExpense['total_cost'] ?? 0;
 
+// Suggested price (dummy calculation)
+$suggested_price = $total_expenses > 0 ? $total_expenses * 1.2 : 0;
+
 // ===== Add Product =====
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
     $category = $_POST['category'];
     $name     = $_POST['name'];
+    $planted_date = $_POST['planted_date'] ?? null;
+    $harvest_date = $_POST['harvest_date'] ?? null;
     $price    = $_POST['price'];
     $stock    = $_POST['stock'];
+    $status   = $_POST['status'] ?? 'available';
     $image = '';
-if (isset($_FILES['image']) && $_FILES['image']['name'] != '') {
-    $image = time() . '_' . basename($_FILES['image']['name']); // unique filename
-    $target = "../uploads/" . $image;
-    move_uploaded_file($_FILES['image']['tmp_name'], $target);
-}
 
-
-    if ($image) {
-        $target = "../uploads/" . basename($image);
+    if (isset($_FILES['image']) && $_FILES['image']['name'] != '') {
+        $image = time() . '_' . basename($_FILES['image']['name']); 
+        $target = "../uploads/" . $image;
         move_uploaded_file($_FILES['image']['tmp_name'], $target);
     }
 
-    $stmt = $conn->prepare("INSERT INTO products (category, name, price, stock, image, user_id) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssdiss", $category, $name, $price, $stock, $image, $user_id);
+    $stmt = $conn->prepare("INSERT INTO products (category, name, price, stock, image, user_id, planted_date, harvest_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssdisssss", $category, $name, $price, $stock, $image, $user_id, $planted_date, $harvest_date, $status);
     $stmt->execute();
     $stmt->close();
 
     header("Location: inventory.php");
     exit;
-}
-
-$search = $_GET['search'] ?? '';
-
-if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT * FROM products WHERE user_id = ? AND (name LIKE ? OR category LIKE ?) ORDER BY product_id DESC");
-    $likeSearch = "%$search%";
-    $stmt->bind_param("ssdiss", $user_id, $likeSearch, $likeSearch);
-    $stmt->execute();
-    $result = $stmt->get_result();
-} else {
-    $result = $conn->query("SELECT * FROM products WHERE user_id = $user_id ORDER BY product_id DESC");
 }
 
 // ===== Edit Product =====
@@ -67,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
     $name     = $_POST['name'];
     $price    = $_POST['price'];
     $stock    = $_POST['stock'];
+    $status   = $_POST['status'] ?? 'available';
 
-    $stmt = $conn->prepare("UPDATE products SET category=?, name=?, price=?, stock=? WHERE product_id=?");
-    $stmt->bind_param("ssdii", $category, $name, $price, $stock, $id);
-
+    $stmt = $conn->prepare("UPDATE products SET category=?, name=?, price=?, stock=?, status=? WHERE product_id=?");
+    $stmt->bind_param("ssdssi", $category, $name, $price, $stock, $status, $id);
     $stmt->execute();
     $stmt->close();
 
@@ -79,11 +69,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
 }
 
 // ===== Fetch Products =====
-$result = $conn->query("SELECT * FROM products ORDER BY product_id DESC");
+$search = $_GET['search'] ?? '';
+if (!empty($search)) {
+    $stmt = $conn->prepare("SELECT * FROM products WHERE user_id = ? AND (name LIKE ? OR category LIKE ?) ORDER BY product_id DESC");
+    $likeSearch = "%$search%";
+    $stmt->bind_param("iss", $user_id, $likeSearch, $likeSearch);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $result = $conn->query("SELECT * FROM products WHERE user_id = $user_id ORDER BY product_id DESC");
+}
 
 // ===== Include Sidebar =====
 include 'sidebar.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,11 +97,13 @@ include 'sidebar.php';
 <body>
 
 <div class="main-content">
+    <h1> Inventory </h1>
   <!-- Summary Cards -->
   <div class="summary-cards">
-      <div class="card total">Total Orders <h2><?= $total_orders ?></h2></div>
+      <div class="card total">Total Orders<h2><?= $total_orders ?></h2></div>
       <div class="card pending">Pending Orders <h2><?= $pending_orders ?></h2></div>
       <div class="card completed">Completed Orders <h2><?= $completed_orders ?></h2></div>
+      <div class="card preorder">Total Pre-Orders<h2><?= $completed_preorders ?></h2></div>
   </div>
 
   <!-- Add Product Button -->
@@ -112,7 +114,9 @@ include 'sidebar.php';
       <tr>
           <th>Product & Category</th>
           <th>Price</th>
-          <th>Date</th>
+          <th>Planted Date</th>
+          <th>Harvest Date</th>
+          <th>Status</th>
           <th>Action</th>
       </tr>
       <?php if ($result->num_rows > 0): ?>
@@ -120,19 +124,22 @@ include 'sidebar.php';
               <tr>
                   <td><?= htmlspecialchars($row['name'])." (".htmlspecialchars($row['category']).")" ?></td>
                   <td>₱<?= number_format($row['price'], 2) ?></td>
-                  <td><?= date("Y-m-d", strtotime($row['created_at'] ?? 'now')) ?></td>
+                  <td><?= htmlspecialchars($row['planted_date'] ?? '') ?></td>
+                  <td><?= htmlspecialchars($row['harvest_date'] ?? '') ?></td>
+                  <td><?= htmlspecialchars(ucfirst($row['status'])) ?></td>
                   <td>
                       <a href="#" class="editBtn"
                          data-id="<?= $row['product_id'] ?>"
                          data-category="<?= htmlspecialchars($row['category']) ?>"
                          data-name="<?= htmlspecialchars($row['name']) ?>"
                          data-price="<?= $row['price'] ?>"
-                         data-stock="<?= $row['stock'] ?>">Edit</a>
+                         data-stock="<?= $row['stock'] ?>"
+                         data-status="<?= $row['status'] ?>"><i class='fa fa-pen'></i></a>
                   </td>
               </tr>
           <?php endwhile; ?>
       <?php else: ?>
-          <tr><td colspan="4">No products added yet.</td></tr>
+          <tr><td colspan="6">No products added yet.</td></tr>
       <?php endif; ?>
   </table>
 </div>
@@ -149,6 +156,12 @@ include 'sidebar.php';
         <label>Product Name</label>
         <input type="text" name="name" required>
 
+        <label>Planted Date</label>
+        <input type="date" name="planted_date" required>
+
+        <label>Harvest Date</label>
+        <input type="date" name="harvest_date" required>
+
         <label>Suggested Price</label>
         <input type="number" value="<?= $suggested_price ?>" readonly>
 
@@ -157,6 +170,12 @@ include 'sidebar.php';
 
         <label>Stock</label>
         <input type="number" name="stock" required>
+
+        <label>Status</label>
+        <select name="status">
+            <option value="available">Available</option>
+            <option value="preorder">Pre-Order</option>
+        </select>
 
         <label>Image</label>
         <input type="file" name="image" accept="image/*">
@@ -186,16 +205,14 @@ include 'sidebar.php';
         <label>Stock</label>
         <input type="number" name="stock" id="editStock" required>
 
+        <label>Status</label>
+        <select name="status" id="editStatus">
+            <option value="available">Available</option>
+            <option value="preorder">Pre-Order</option>
+        </select>
+
         <button type="submit" name="edit_product">Update</button>
     </form>
-  </div>
-</div>
-
-<!-- View Image Modal -->
-<div id="imgModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closeImg">&times;</span>
-    <img id="modalImage" src="" alt="Product Image">
   </div>
 </div>
 
@@ -216,28 +233,16 @@ document.querySelectorAll(".editBtn").forEach(btn => {
         document.getElementById("editName").value = btn.dataset.name;
         document.getElementById("editPrice").value = btn.dataset.price;
         document.getElementById("editStock").value = btn.dataset.stock;
+        document.getElementById("editStatus").value = btn.dataset.status;
         editModal.style.display = "flex";
     };
 });
 closeEdit.onclick = () => editModal.style.display = "none";
 
-// Image Modal
-const imgModal = document.getElementById("imgModal");
-const modalImage = document.getElementById("modalImage");
-document.querySelectorAll(".viewImageBtn").forEach(btn => {
-    btn.onclick = (e) => {
-        e.preventDefault();
-        modalImage.src = btn.dataset.img;
-        imgModal.style.display = "flex";
-    };
-});
-document.getElementById("closeImg").onclick = () => imgModal.style.display = "none";
-
-// Close when clicking outside
+// Close modals when clicking outside
 window.onclick = (e) => {
   if (e.target === addModal) addModal.style.display = "none";
   if (e.target === editModal) editModal.style.display = "none";
-  if (e.target === imgModal) imgModal.style.display = "none";
 };
 </script>
 
