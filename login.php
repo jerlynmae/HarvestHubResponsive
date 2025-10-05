@@ -27,10 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role'] = $row['role']; 
             // redirect based on role
             if ($row['role'] === 'farmer') {
-                header("Location: farmer/farmer_dashboard.php");
+                header("Location: user/farmer/farmer_dashboard.php");
                 exit;
             } elseif ($row['role'] === 'customer') {
-                header("Location: customer/customer_page.php");
+                header("Location: user/customer/customer_page.php");
                 exit;
             } else {
                 // fallback
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <button type="submit" class="btn-login">Log In</button>
     </form>
     <a href="#">Forgot Password?</a>
-    <a href="#">Sell your Harvest?</a>
+    <a href="user/farmer/farmer_signup.php">Sell your Harvest?</a>
   </div>
 </body>
 </html>

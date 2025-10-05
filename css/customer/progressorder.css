@@ -1,0 +1,231 @@
+/* ================= GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --green: #2ecc71;
+  --dark: #2c3e50;
+  --light: #f9f9f9;
+  --white: #ffffff;
+  --radius: 16px;
+  --shadow: 0 6px 18px rgba(0,0,0,0.08);
+  --transition: 0.3s ease;
+}
+
+body {
+  background: var(--light);
+  color: var(--dark);
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* ================= LAYOUT ================= */
+.container {
+  display: flex;
+  gap: 30px;
+}
+
+.left {
+  flex: 2;
+}
+
+.right {
+  flex: 1;
+}
+
+/* ================= CARD ================= */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+}
+
+/* ================= STATUS ================= */
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status .badge {
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(46,204,113,0.08);
+}
+
+/* Status Main */
+.status-main {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.status-main i {
+  font-size: 64px;
+  color: var(--green);
+}
+
+.status-main p {
+  margin-top: 10px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ================= ITEMS ================= */
+.items {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.items table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+
+.items th,
+.items td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.items th {
+  background: var(--green);
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.items tr:hover {
+  background: #f4f9f4;
+  transition: var(--transition);
+}
+
+.items img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+
+/* ================= CANCEL BUTTON ================= */
+.cancel-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--green);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cancel-btn:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(46,204,113,0.3);
+}
+
+/* ================= SUMMARY ================= */
+.order-summary h4 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.summary-item strong {
+  font-weight: 700;
+}
+
+.highlight {
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .left,
+  .right {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  .status-main i {
+    font-size: 48px;
+  }
+
+  .items table {
+    min-width: 420px;
+  }
+
+  .items th,
+  .items td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .cancel-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  .right {
+    order: 2;
+    margin-top: 15px;
+  }
+
+  .left {
+    order: 1;
+  }
+}

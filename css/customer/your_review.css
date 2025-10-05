@@ -1,0 +1,101 @@
+/* --- MAIN CONTENT WRAPPER --- */
+.main {
+  margin-top: 70px; /* space below topbar */
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+
+/* --- REVIEWS BANNER --- */
+.reviews-banner {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.reviews-banner h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #16a085;
+  margin-bottom: 8px;
+}
+.reviews-banner .subtitle {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+/* --- REVIEWS LIST --- */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- REVIEW ITEM CARD --- */
+.review-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.review-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* --- REVIEW HEADER --- */
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+.product-img {
+  width: 65px;
+  height: 65px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.product-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+}
+.stars {
+  color: #f5b50a; /* gold stars */
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+.date {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* --- REVIEW TEXT --- */
+.review-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .main {
+    padding: 15px;
+  }
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .product-img {
+    width: 55px;
+    height: 55px;
+  }
+  .product-name {
+    font-size: 0.95rem;
+  }
+  .review-text {
+    font-size: 0.9rem;
+  }
+}
